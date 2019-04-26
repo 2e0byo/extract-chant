@@ -1,0 +1,29 @@
+#+Title: Extract Chant from scanned Chantbooks
+
+* Overview
+
+Here is some code to take an image, rotate it and split it into lines.
+If you tell it too, it will make sure those lines contain four-line or
+five-line stave.  It’s designed for converting scanned chantbooks or
+music books into sequentially named image which can then be included
+in a LaTeX document with something like:
+#+BEGIN_SRC LaTeX
+\newcommand{\pnglines}[2]{%
+  % Include a lot of lines of chant as individual pngs
+  % #1 = preface
+  % #2 = range
+  \makeatletter
+  \newcount\i
+  \i=0
+  \loop\ifnum\i<#2
+  \advance\i by 1\relax
+  \noindent\includegraphics[width=\textwidth]{./chants/{#1\two@digits{\the\i}}.png}
+  \repeat
+  \makeatother
+}
+#+END_SRC
+
+Can you tell I can’t see the point in LaTeX looping macros? ;)
+
+* Dependencies
+  Python, cv2, numpy
