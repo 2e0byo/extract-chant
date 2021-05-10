@@ -53,9 +53,17 @@ parser.add_argument(
     help="Use Houghing to check each line, only exporting if four or more lines detected (=stave)",
     action="store_true")
 
+parser.add_argument(
+    "--min-white",
+    help="Minimum white length",
+    type=int,
+    default=ls.min_white)
+
 args = parser.parse_args()
 
 # Execution starts here
+
+ls.min_white = args.min_white
 
 img, gray, threshed = ls.read_image(args.INPUT)
 if args.rectangle is True:
@@ -74,9 +82,9 @@ bands = ls.smarten_lines(uppers_y, lowers_y)
 
 i = args.offset
 for band in bands:
+    print(band)
     if args.hough_detect_lines is True:
         tmp = rotated_original[band[0]:band[1], lower_x:upper_x].copy()
-        cv2.imshow("tmp", tmp)
         if not hougher.hough_detect_lines(tmp):
             continue
     i += 1
