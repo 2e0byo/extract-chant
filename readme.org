@@ -31,5 +31,14 @@ For normal use, use ~split_chant.py~.  To play with the Houghing
 values, use ~hougher.py~ directly and it will give you some sliders;
 then you can pass the values to ~split_chant.py~.
 
+* Installation
+  You can use poetry:
+
+#+BEGIN_SRC sh
+poetry install
+poetry shell
+python hougher.py input.jpg
+#+END_SRC
+
 * Dependencies
   Python, cv2, numpy
